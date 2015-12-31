@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://mit-license.org/</licenseUrl>
+    <projectUrl>https://github.com/guang810828/yhsd-api-csharp</projectUrl>
+    <iconUrl>https://asset.ibanquan.com/manage/favicon.ico?</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>First Release.</releaseNotes>
+    <copyright>Copyright Kesoft Studio 2015</copyright>
+    <tags>YHSD API CSHARP .NET4.0</tags>
+  </metadata>
+</package>

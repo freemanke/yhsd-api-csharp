@@ -1,0 +1,10 @@
+
+*.user
+*.suo
+*.DotSettings
+bin
+obj
+packages
+publish
+sources/Fhit.Ucall.Api.DTO/Fhit.Ucall.Api/App_Data/Fhit.Ucall.Api.DTO.XML
+sources/Fhit.Ucall.Api/App_Data/Fhit.Ucall.Api.DTO.XML

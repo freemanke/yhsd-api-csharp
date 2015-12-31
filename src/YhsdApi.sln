@@ -1,0 +1,33 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YhsdApi", "YhsdApi\YhsdApi.csproj", "{66CAB376-87E1-4B52-AED5-F46718D709AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YhsdApi.Tests", "YhsdApi.Tests\YhsdApi.Tests.csproj", "{B97278A5-E52D-481F-B4F5-99ECA29172EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YhsdApi.Samples", "YhsdApi.Samples\YhsdApi.Samples.csproj", "{B5A9B675-F583-4B58-B68D-4588AC43D551}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{66CAB376-87E1-4B52-AED5-F46718D709AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66CAB376-87E1-4B52-AED5-F46718D709AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66CAB376-87E1-4B52-AED5-F46718D709AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66CAB376-87E1-4B52-AED5-F46718D709AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B97278A5-E52D-481F-B4F5-99ECA29172EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B97278A5-E52D-481F-B4F5-99ECA29172EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B97278A5-E52D-481F-B4F5-99ECA29172EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B97278A5-E52D-481F-B4F5-99ECA29172EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5A9B675-F583-4B58-B68D-4588AC43D551}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5A9B675-F583-4B58-B68D-4588AC43D551}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5A9B675-F583-4B58-B68D-4588AC43D551}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5A9B675-F583-4B58-B68D-4588AC43D551}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

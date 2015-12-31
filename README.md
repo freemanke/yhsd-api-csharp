@@ -10,4 +10,4 @@
 
 ## 使用方法
 
-详见[单元测试和使用示例](https://github.com/guang810828/yhsd-api-csharp)。
+详见单元测试和使用示例。

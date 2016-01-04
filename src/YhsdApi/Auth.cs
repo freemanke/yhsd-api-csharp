@@ -2,13 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Security.Cryptography;
 using System.Text;
-using Newtonsoft.Json;
-using RestSharp;
-using RestSharp.Authenticators;
-using YhsdApi.Exceptions;
 
 namespace YhsdApi
 {
@@ -18,83 +13,12 @@ namespace YhsdApi
     public class Auth
     {
         /// <summary>
-        /// 获取开放应用授权地址。
-        /// </summary>
-        /// <param name="redirectUrl"></param>
-        /// <param name="shopKey"></param>
-        /// <param name="state"></param>
-        /// <returns></returns>
-        public string GetPublicAppAuthorizeUrl(string redirectUrl, string shopKey, string state)
-        {
-            if (string.IsNullOrEmpty(Configuration.AppKey)) throw new MissingAppKeyException();
-            if (string.IsNullOrEmpty(Configuration.AppSecret)) throw new MissingAppSecretException();
-
-            var queryString = "?response_type=code";
-            queryString += $"&client_id={Configuration.AppKey}";
-            queryString += $"&shop_key={shopKey}";
-            queryString += $"&scope={Configuration.Scope}";
-            queryString += $"&redirect_uri={redirectUrl}";
-            if (!string.IsNullOrEmpty(state)) queryString += $"&state={state}";
-
-            return Configuration.AuthUrl + queryString;
-        }
-
-        /// <summary>
-        /// 获取私有应用token。
-        /// </summary>
-        /// <returns>token。</returns>
-        public string GetPrivateAppToken()
-        {
-            var client = new RestClient(Configuration.TokenUrl);
-            client.AddDefaultHeader("content_type", "application/x-www-form-urlencoded");
-            client.Authenticator = new HttpBasicAuthenticator(Configuration.AppKey, Configuration.AppSecret);
-            var request = new RestRequest(Method.POST);
-            request.AddParameter("grant_type", "client_credentials");
-            var response = client.Execute(request);
-
-            if (response.StatusCode != HttpStatusCode.OK)
-                throw new Exception(response.Content);
-
-            var token = JsonConvert.DeserializeObject<AccessToken>(response.Content).token;
-            return token;
-        }
-
-
-        /// <summary>
-        /// 获取公有应用token。
-        /// </summary>
-        /// <param name="redirectUrl">重定向地址。</param>
-        /// <param name="code">可在请求中获取。</param>
-        /// <returns>token.</returns>
-        public string GetPublicAppToken(string redirectUrl, string code)
-        {
-            var client = new RestClient(Configuration.TokenUrl);
-            client.AddDefaultHeader("content_type", "application/x-www-form-urlencoded");
-            client.Authenticator = new HttpBasicAuthenticator(Configuration.AppKey, Configuration.AppSecret);
-            var request = new RestRequest(Method.POST);
-            request.AddParameter("grant_type", "authorization_code");
-            request.AddParameter("code", code);
-            request.AddParameter("client_id", Configuration.AppKey);
-            request.AddParameter("redirect_url", redirectUrl);
-
-            var response = client.Execute(request);
-
-            if (response.StatusCode == HttpStatusCode.OK)
-            {
-                var token = JsonConvert.DeserializeObject<AccessToken>(response.Content).token;
-                return token;
-            }
-
-            return null;
-        }
-
-        /// <summary>
         /// 第三方接入支持。
         /// </summary>
         /// <param name="json">待加密数据。</param>
         /// <param name="Key">密钥。</param>
         /// <returns></returns>
-        public string ThirdAppAesEncrypt(string json, string Key)
+        public static string ThirdAppAesEncrypt(string json, string Key)
         {
             SymmetricAlgorithm rijndael = Rijndael.Create();
 
@@ -124,7 +48,7 @@ namespace YhsdApi
         /// <param name="secret"></param>
         /// <param name="param">所有请求参数转换成字典。</param>
         /// <returns></returns>
-        public bool VerifyHmac(string secret, Dictionary<string, string> param)
+        public static bool VerifyHmac(string secret, Dictionary<string, string> param)
         {
             if (string.IsNullOrEmpty(secret)) throw new ArgumentNullException(nameof(secret));
 
@@ -148,7 +72,7 @@ namespace YhsdApi
         /// <param name="data">通知数据。</param>
         /// <param name="hmac">通知数据头部的hmac。</param>
         /// <returns></returns>
-        public bool VerifyWebhook(string token, string data, string hmac)
+        public static bool VerifyWebhook(string token, string data, string hmac)
         {
             if (string.IsNullOrEmpty(token)) throw new ArgumentNullException(nameof(token));
             if (string.IsNullOrEmpty(data)) throw new ArgumentNullException(nameof(data));

@@ -47,8 +47,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="YhsdApi, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\YhsdApi.1.0.0.3\lib\net40\YhsdApi.dll</HintPath>
+    <Reference Include="YhsdApi, Version=1.0.0.6, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YhsdApi.1.0.0.6\lib\net40\YhsdApi.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

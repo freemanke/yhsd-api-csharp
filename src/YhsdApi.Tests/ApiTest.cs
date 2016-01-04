@@ -6,18 +6,23 @@ namespace YhsdApi.Tests
 {
     public class ApiTest
     {
+        private const string appKey = "790a310b972540de86b5c4817f04f459";
+        private const string appSecret = "4efdf06458ab4dd09d3972b83de7cd52";
+        private Api api;
+
+        private string token;
+
         [TestFixtureSetUp]
         public void SetUp()
         {
-            Configuration.AppKey = "790a310b972540de86b5c4817f04f459";
-            Configuration.AppSecret = "4efdf06458ab4dd09d3972b83de7cd52";
-            Configuration.CallLimitProtect = true;
+            var auth = new PrivateAppAuth(appKey, appSecret);
+            token = auth.GetToken();
+            api = new Api(token);
         }
 
         [Test]
         public void Get()
         {
-            var api = new Api(new Auth().GetPrivateAppToken());
             var response = api.Get("countries");
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
         }
@@ -25,7 +30,6 @@ namespace YhsdApi.Tests
         [Test]
         public void Post()
         {
-            var api = new Api(new Auth().GetPrivateAppToken());
             var response = api.Post("customers", new
             {
                 customer = new
@@ -43,7 +47,6 @@ namespace YhsdApi.Tests
         [Test]
         public void Put()
         {
-            var api = new Api(new Auth().GetPrivateAppToken());
             var response = api.Put("customers/15924", new
             {
                 customer = new
@@ -61,7 +64,6 @@ namespace YhsdApi.Tests
         [Test]
         public void Delete()
         {
-            var api = new Api(new Auth().GetPrivateAppToken());
             var response = api.Get("customers/1");
             Assert.AreEqual((HttpStatusCode) 422, response.StatusCode);
         }

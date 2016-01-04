@@ -57,6 +57,8 @@
     <Compile Include="Exceptions\MissingScopeException.cs" />
     <Compile Include="Api.cs" />
     <Compile Include="Exceptions\MissingUrlException.cs" />
+    <Compile Include="PublicAppAuth.cs" />
+    <Compile Include="PrivateAppAuth.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

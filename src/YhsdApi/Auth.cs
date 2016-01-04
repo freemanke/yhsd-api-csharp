@@ -26,8 +26,8 @@ namespace YhsdApi
         /// <returns></returns>
         public string GetPublicAppAuthorizeUrl(string redirectUrl, string shopKey, string state)
         {
-            if (Configuration.AppKey == null) throw new MissingAppKeyException();
-            if (Configuration.AppSecret == null) throw new MissingAppSecretException();
+            if (string.IsNullOrEmpty(Configuration.AppKey)) throw new MissingAppKeyException();
+            if (string.IsNullOrEmpty(Configuration.AppSecret)) throw new MissingAppSecretException();
 
             var queryString = "?response_type=code";
             queryString += $"&client_id={Configuration.AppKey}";
@@ -35,27 +35,6 @@ namespace YhsdApi
             queryString += $"&scope={Configuration.Scope}";
             queryString += $"&redirect_uri={redirectUrl}";
             if (!string.IsNullOrEmpty(state)) queryString += $"&state={state}";
-
-            return Configuration.AuthUrl + queryString;
-        }
-
-
-        /// <summary>
-        /// 获取私有应用授权地址。
-        /// </summary>
-        /// <param name="redirectUrl"></param>
-        /// <param name="shopKey"></param>
-        /// <returns></returns>
-        public string GetPrivateAppAuthorizeUrl(string redirectUrl, string shopKey)
-        {
-            if (Configuration.AppKey == null) throw new MissingAppKeyException();
-            if (Configuration.AppSecret == null) throw new MissingAppSecretException();
-
-            var queryString = "?response_type=code";
-            queryString += $"&client_id={Configuration.AppKey}";
-            queryString += $"&shop_key={shopKey}";
-            queryString += $"&scope={Configuration.Scope}";
-            queryString += $"&redirect_uri={redirectUrl}";
 
             return Configuration.AuthUrl + queryString;
         }

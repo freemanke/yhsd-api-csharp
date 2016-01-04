@@ -60,13 +60,6 @@ namespace YhsdApi.Tests
         }
 
         [Test]
-        public void GetPrivateAppAuthorizeUrl()
-        {
-            var auth = new Auth();
-            Assert.NotNull(auth.GetPrivateAppAuthorizeUrl("http://example.com", "shop-key"));
-        }
-
-        [Test]
         public void GetPublicAppAuthorizeUrl()
         {
             var auth = new Auth();

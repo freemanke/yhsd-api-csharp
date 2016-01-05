@@ -25,7 +25,14 @@
             Scope = "";
         }
 
+        /// <summary>
+        /// App key.
+        /// </summary>
         public static string AppKey { get; set; }
+
+        /// <summary>
+        /// App secret.
+        /// </summary>
         public static string AppSecret { get; set; }
 
         /// <summary>
@@ -76,7 +83,14 @@
             set { if (!string.IsNullOrEmpty(value)) apiVersion = value.Trim('/'); }
         }
 
+        /// <summary>
+        /// Scope, 多个值使用","连接。
+        /// </summary>
         public static string Scope { get; set; }
+
+        /// <summary>
+        /// 是否使用调用保护，默认开启。
+        /// </summary>
         public static bool CallLimitProtect { get; set; }
     }
 }

@@ -65,7 +65,7 @@ namespace YhsdApi
             request.AddParameter("grant_type", "authorization_code");
             request.AddParameter("code", code);
             request.AddParameter("client_id", Configuration.AppKey);
-            request.AddParameter("redirect_url", Configuration.AppRedirectUrl);
+            request.AddParameter("redirect_uri", Configuration.AppRedirectUrl);
             Console.WriteLine();
             var response = client.Execute(request);
 

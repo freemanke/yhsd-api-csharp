@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthTest.cs" />
     <Compile Include="PublicAppAuthTest.cs" />
     <Compile Include="PrivateAppAuthTest.cs" />
     <Compile Include="ApiTest.cs" />

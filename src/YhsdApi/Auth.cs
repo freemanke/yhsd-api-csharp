@@ -56,7 +56,7 @@ namespace YhsdApi
             param.Remove("hmac");
             var keyValues = param.OrderBy(a => a.Key);
             var message = string.Join("&", keyValues.Select(a => a.Key + "=" + a.Value));
-            var encoder = Encoding.GetEncoding("utf-8");
+            var encoder = Encoding.UTF8;
             var provider = new HMACSHA256(encoder.GetBytes(secret));
             var bytes = provider.ComputeHash(encoder.GetBytes(message));
             var computed = string.Join("", bytes.ToList().Select(a => a.ToString("x2")));
@@ -78,7 +78,7 @@ namespace YhsdApi
             if (string.IsNullOrEmpty(data)) throw new ArgumentNullException(nameof(data));
             if (string.IsNullOrEmpty(hmac)) throw new ArgumentNullException(nameof(hmac));
 
-            var encoder = Encoding.GetEncoding("utf-8");
+            var encoder = Encoding.UTF8;
             var provider = new HMACSHA256(encoder.GetBytes(token));
             var bytes = provider.ComputeHash(encoder.GetBytes(data));
             var computed = Convert.ToBase64String(bytes);

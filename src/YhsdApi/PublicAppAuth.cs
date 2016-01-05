@@ -2,7 +2,6 @@
 using System.Net;
 using Newtonsoft.Json;
 using RestSharp;
-using RestSharp.Authenticators;
 using YhsdApi.Exceptions;
 
 namespace YhsdApi
@@ -18,18 +17,18 @@ namespace YhsdApi
         /// <param name="appKey">插件/应用的appKey,可在合作伙伴后台获取。</param>
         /// <param name="appSecret">插件/应用的appSecret,可在合作伙伴后台获取。</param>
         /// <param name="appRedirectUrl"></param>
-        /// <param name="scope"></param>
+        /// <param name="scope">必填，</param>
         public PublicAppAuth(string appKey, string appSecret, string appRedirectUrl, string scope)
         {
             if (string.IsNullOrEmpty(appKey)) throw new MissingAppKeyException();
             if (string.IsNullOrEmpty(appSecret)) throw new MissingAppSecretException();
-            if (string.IsNullOrEmpty(appSecret)) throw new ArgumentNullException(nameof(appRedirectUrl));
-            if (string.IsNullOrEmpty(appSecret)) throw new ArgumentNullException(nameof(scope));
+            if (string.IsNullOrEmpty(appRedirectUrl)) throw new ArgumentNullException(nameof(appRedirectUrl));
+            if (string.IsNullOrEmpty(scope)) throw new ArgumentNullException(nameof(scope));
 
             Configuration.AppKey = appKey;
             Configuration.AppSecret = appSecret;
             Configuration.AppRedirectUrl = appRedirectUrl;
-            Configuration.Scope = scope;
+            Configuration.Scope = scope.Replace("\r", "").Replace("\n", "");
         }
 
         /// <summary>
@@ -50,7 +49,7 @@ namespace YhsdApi
             queryString += $"&redirect_uri={Configuration.AppRedirectUrl}";
             if (!string.IsNullOrEmpty(state)) queryString += $"&state={state}";
 
-            return Configuration.AppRedirectUrl + queryString;
+            return Configuration.AuthUrl + queryString;
         }
 
         /// <summary>
@@ -62,13 +61,12 @@ namespace YhsdApi
         {
             var client = new RestClient(Configuration.TokenUrl);
             client.AddDefaultHeader("content_type", "application/x-www-form-urlencoded");
-            client.Authenticator = new HttpBasicAuthenticator(Configuration.AppKey, Configuration.AppSecret);
             var request = new RestRequest(Method.POST);
             request.AddParameter("grant_type", "authorization_code");
             request.AddParameter("code", code);
             request.AddParameter("client_id", Configuration.AppKey);
             request.AddParameter("redirect_url", Configuration.AppRedirectUrl);
-
+            Console.WriteLine();
             var response = client.Execute(request);
 
             if (response.StatusCode == HttpStatusCode.OK)

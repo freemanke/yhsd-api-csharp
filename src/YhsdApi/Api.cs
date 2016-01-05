@@ -21,7 +21,7 @@ namespace YhsdApi
         /// <summary>
         /// 构造方法。
         /// </summary>
-        /// <param name="token">可以通过<see cref="Auth"/>获取。</param>
+        /// <param name="token">可以通过授权类获取。</param>
         public Api(string token)
         {
             this.token = token;
@@ -35,9 +35,9 @@ namespace YhsdApi
         /// <returns><see cref="IRestResponse"/>响应对象。</returns>
         public IRestResponse Get(string path, Dictionary<string, string> param = null)
         {
-            if (path == null) throw new MissingUrlException();
+            if (string.IsNullOrEmpty(path)) throw new MissingUrlException();
 
-            client.BaseUrl = new Uri(Configuration.ApiUrl + Configuration.ApiVersion + path + GetQueryString(param));
+            client.BaseUrl = new Uri(GetApiBaseUrl() + path.Trim('/') + GetQueryString(param));
             var request = new RestRequest(Method.GET);
             request.AddHeader("X-API-ACCESS-TOKEN", token);
             request.AddHeader("content_tpe", "json");
@@ -59,9 +59,9 @@ namespace YhsdApi
         /// <returns><see cref="IRestResponse"/>响应对象。</returns>
         public IRestResponse Post(string path, object body)
         {
-            if (path == null) throw new MissingUrlException();
+            if (string.IsNullOrEmpty(path)) throw new MissingUrlException();
 
-            client.BaseUrl = new Uri(Configuration.ApiUrl + Configuration.ApiVersion + path);
+            client.BaseUrl = new Uri(GetApiBaseUrl() + path.Trim('/'));
             var request = new RestRequest(Method.POST);
             request.AddHeader("X-API-ACCESS-TOKEN", token);
             request.AddHeader("content_tpe", "json");
@@ -85,9 +85,9 @@ namespace YhsdApi
         /// <returns><see cref="IRestResponse"/>响应对象。</returns>
         public IRestResponse Put(string path, object body)
         {
-            if (path == null) throw new MissingUrlException();
+            if (string.IsNullOrEmpty(path)) throw new MissingUrlException();
 
-            client.BaseUrl = new Uri(Configuration.ApiUrl + Configuration.ApiVersion + path);
+            client.BaseUrl = new Uri(GetApiBaseUrl() + path.Trim('/'));
             var request = new RestRequest(Method.PUT);
             request.AddHeader("X-API-ACCESS-TOKEN", token);
             request.AddHeader("content_tpe", "json");
@@ -110,9 +110,9 @@ namespace YhsdApi
         /// <returns><see cref="IRestResponse"/>响应对象。</returns>
         public IRestResponse Delete(string path)
         {
-            if (path == null) throw new MissingUrlException();
+            if (string.IsNullOrEmpty(path)) throw new MissingUrlException();
 
-            client.BaseUrl = new Uri(Configuration.ApiUrl + Configuration.ApiVersion + path);
+            client.BaseUrl = new Uri(GetApiBaseUrl() + path.Trim('/'));
             var request = new RestRequest(Method.DELETE);
             request.AddHeader("X-API-ACCESS-TOKEN", token);
 
@@ -123,6 +123,8 @@ namespace YhsdApi
 
             return response;
         }
+
+        private static string GetApiBaseUrl() => Configuration.ApiUrl + "/" + Configuration.ApiVersion + "/";
 
         private void BeginRequest()
         {
@@ -146,10 +148,11 @@ namespace YhsdApi
             }
         }
 
-        private string GetQueryString(Dictionary<string, string> param)
+        private static string GetQueryString(Dictionary<string, string> param)
         {
             var query = "";
             if (param != null) query += "?" + string.Join("&", param.Select(a => a.Key + "=" + a.Value));
+
             return query;
         }
     }

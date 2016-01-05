@@ -24,8 +24,8 @@ namespace YhsdApi.Tests
         public void VerifyWebhook()
         {
             var token = "906155047ff74a14a1ca6b1fa74d3390";
-            var data = "{\"created_at\":\"2014-08-28T17:28:13.301+08:00\",\"domain\":\"www.example.com\",\"enable_email_regist\":true,\"enable_mobile_regist\":true,\"enable_username_regist\":true,\"name\":\"TEST\",\"page_description\":\"\",\"page_title\":\"\",\"updated_at\":\"2015-07-27T13:58:14.607+08:00\",\"url\":\"http://w...content-available-to-author-only...e.com\",\"webhook_token\":\"906155047ff74a14a1ca6b1fa74d3390\"}";
-            var hmac = "NS0Wcz2CDgzI4+L9/UYdwaXpPI4As7VD+wKCRgKqNUo=";
+            var data = "data";
+            var hmac = "3iAqy/BJfK2U3VU77vAPsGXmSnJqNVqurqHJeho326Q=";
             Assert.IsTrue(Auth.VerifyWebhook(token, data, hmac));
         }
 

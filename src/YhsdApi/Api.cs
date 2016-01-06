@@ -64,7 +64,6 @@ namespace YhsdApi
             client.BaseUrl = new Uri(GetApiBaseUrl() + path.Trim('/'));
             var request = new RestRequest(Method.POST);
             request.AddHeader("X-API-ACCESS-TOKEN", token);
-            request.AddHeader("content_tpe", "json");
             request.AddHeader("accept", "json");
             request.RequestFormat = DataFormat.Json;
             if (body != null) request.AddBody(body);

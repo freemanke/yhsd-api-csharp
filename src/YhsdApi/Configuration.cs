@@ -20,7 +20,7 @@
             apiUrl = "https://api.youhaosuda.com";
             authUrl = "https://apps.youhaosuda.com/oauth2/authorize";
             apiVersion = "v1";
-            CallLimitProtect = true;
+            CallLimitProtect = false;
 
             Scope = "";
         }
@@ -89,7 +89,7 @@
         public static string Scope { get; set; }
 
         /// <summary>
-        /// 是否使用调用保护，默认开启。
+        /// 是否使用调用保护，默认关闭。
         /// </summary>
         public static bool CallLimitProtect { get; set; }
     }

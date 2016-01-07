@@ -40,12 +40,10 @@ namespace YhsdApi
             client.BaseUrl = new Uri(GetApiBaseUrl() + path.Trim('/') + GetQueryString(param));
             var request = new RestRequest(Method.GET);
             request.AddHeader("X-API-ACCESS-TOKEN", token);
-            request.AddHeader("content_tpe", "json");
-            request.AddHeader("accept", "json");
+            request.AddHeader("Content-Type", "application/json");
 
             BeginRequest();
             var response = client.Execute(request);
-            Console.WriteLine(response.Content);
             AfterRequest(response.Headers);
 
             return response;
@@ -64,13 +62,12 @@ namespace YhsdApi
             client.BaseUrl = new Uri(GetApiBaseUrl() + path.Trim('/'));
             var request = new RestRequest(Method.POST);
             request.AddHeader("X-API-ACCESS-TOKEN", token);
-            request.AddHeader("accept", "json");
+            request.AddHeader("Content-Type", "application/json");
             request.RequestFormat = DataFormat.Json;
             if (body != null) request.AddBody(body);
 
             BeginRequest();
             var response = client.Execute(request);
-            Console.WriteLine(response.Content);
             AfterRequest(response.Headers);
 
             return response;
@@ -89,14 +86,12 @@ namespace YhsdApi
             client.BaseUrl = new Uri(GetApiBaseUrl() + path.Trim('/'));
             var request = new RestRequest(Method.PUT);
             request.AddHeader("X-API-ACCESS-TOKEN", token);
-            request.AddHeader("content_tpe", "json");
-            request.AddHeader("accept", "json");
+            request.AddHeader("Content-Type", "application/json");
             request.RequestFormat = DataFormat.Json;
             if (body != null) request.AddBody(body);
 
             BeginRequest();
             var response = client.Execute(request);
-            Console.WriteLine(response.Content);
             AfterRequest(response.Headers);
 
             return response;
@@ -117,7 +112,6 @@ namespace YhsdApi
 
             BeginRequest();
             var response = client.Execute(request);
-            Console.WriteLine(response.Content);
             AfterRequest(response.Headers);
 
             return response;

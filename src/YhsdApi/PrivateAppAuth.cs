@@ -33,7 +33,7 @@ namespace YhsdApi
         public string GetToken()
         {
             var client = new RestClient(Configuration.TokenUrl);
-            client.AddDefaultHeader("content_type", "application/x-www-form-urlencoded");
+            client.AddDefaultHeader("Content-Type", "application/x-www-form-urlencoded");
             client.Authenticator = new HttpBasicAuthenticator(Configuration.AppKey, Configuration.AppSecret);
             var request = new RestRequest(Method.POST);
             request.AddParameter("grant_type", "client_credentials");

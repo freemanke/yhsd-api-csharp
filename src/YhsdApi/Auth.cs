@@ -82,7 +82,6 @@ namespace YhsdApi
             var provider = new HMACSHA256(encoder.GetBytes(token));
             var bytes = provider.ComputeHash(encoder.GetBytes(data));
             var computed = Convert.ToBase64String(bytes);
-            Console.WriteLine(computed);
 
             return computed == hmac;
         }

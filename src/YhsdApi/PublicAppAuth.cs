@@ -60,13 +60,12 @@ namespace YhsdApi
         public string GetToken(string code)
         {
             var client = new RestClient(Configuration.TokenUrl);
-            client.AddDefaultHeader("content_type", "application/x-www-form-urlencoded");
+            client.AddDefaultHeader("Content-Type", "application/x-www-form-urlencoded");
             var request = new RestRequest(Method.POST);
             request.AddParameter("grant_type", "authorization_code");
             request.AddParameter("code", code);
             request.AddParameter("client_id", Configuration.AppKey);
             request.AddParameter("redirect_uri", Configuration.AppRedirectUrl);
-            Console.WriteLine();
             var response = client.Execute(request);
 
             if (response.StatusCode == HttpStatusCode.OK)
